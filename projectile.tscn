@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsyr6cru2bwlm"]
+
+[ext_resource type="Texture2D" uid="uid://difqhsgh6o72i" path="res://64aseetsbarnyard/iso_cube_missile_#C0C0C0_.png" id="1_a85iw"]
+[ext_resource type="Script" uid="uid://cgcvx7hjps6f0" path="res://projectile_body.gd" id="1_qxf0c"]
+[ext_resource type="Script" uid="uid://cd65cxmpcfar8" path="res://projectile_visuals.gd" id="3_dgwo2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qxf0c"]
+radius = 24.0
+height = 48.0
+
+[node name="Projectile" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_qxf0c")
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="Hitbox" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_qxf0c")
+
+[node name="ProjectileVisuals" type="Node2D" parent="."]
+script = ExtResource("3_dgwo2")
+
+[node name="Sprite" type="Sprite2D" parent="ProjectileVisuals"]
+texture = ExtResource("1_a85iw")
+
+[node name="HitParticles" type="GPUParticles2D" parent="ProjectileVisuals"]
+texture = ExtResource("1_a85iw")
