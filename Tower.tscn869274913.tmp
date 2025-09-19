@@ -29,9 +29,10 @@ monitorable = false
 position = Vector2(0, -80)
 shape = SubResource("RectangleShape2D_0ule7")
 
-[node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("upgradable_sprites")]
+[node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("upgradable_sprites", "normal_sprites")]
 script = ExtResource("4_uxamf")
-upgradable_sprites = [NodePath("Sprite2D3"), NodePath("Sprite2D4"), NodePath("Sprite2D5")]
+upgradable_sprites = [NodePath("Sprite2D5"), NodePath("Sprite2D4"), NodePath("Sprite2D3")]
+normal_sprites = [NodePath("Sprite2D6")]
 
 [node name="Sprite2D3" type="Sprite2D" parent="Visuals"]
 texture = ExtResource("1_bn6qc")

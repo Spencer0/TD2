@@ -1,5 +1,5 @@
 extends Control
-@onready var upgrade_button: Button = $ExpandableInfo/Upgrade
+@onready var upgrade_button: Button = $PanelContainer/ExpandableInfo/UpgradeButton
 @onready var tower_info_container: PanelContainer = $PanelContainer
 @onready var display_label: Label = $PanelContainer/ExpandableInfo/DisplayName
 @onready var subviewport: SubViewport = $PanelContainer/ExpandableInfo/TowerStats/SubViewportContainer/SubViewport
@@ -14,6 +14,7 @@ var just_opened := false
 
 func _ready() -> void:
 	close_list()
+	upgrade_button.pressed.connect(_on_upgrade_button_pressed)
 	
 func _on_tower_clicked(tower: Node, resource: TowerResource) -> void:
 		current_tower = tower
@@ -27,10 +28,13 @@ func expand_list() -> void:
 	tower_info_container.show()
 	for child in subviewport.get_children():
 		child.queue_free()
-	if current_tower.has_node("Visuals"):
 		var tower_visuals: Node = current_tower.get_node("Visuals")
 		var copy = tower_visuals.duplicate(DUPLICATE_SIGNALS)
 		copy.position = Vector2(108, 198)
+		copy.modulate = Color.WHITE
+		# Destroy all tweens the copy may have, before snapshotting. 
+		# The "click" tween (turns it green slightly)
+		# is getting snapshotted into my viewport :) 
 		subviewport.add_child(copy)
 		
 func _unhandled_input(event: InputEvent) -> void:
@@ -47,3 +51,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func close_list() -> void:
 	tower_info_container.hide()
+	
+func _on_upgrade_button_pressed():
+	print('upgrade0')
+	current_tower.upgrade()

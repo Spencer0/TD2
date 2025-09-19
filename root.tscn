@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://cj77no650hiir"]
+[gd_scene load_steps=38 format=4 uid="uid://cj77no650hiir"]
 
 [ext_resource type="Script" uid="uid://dvga6ax6o0lwx" path="res://unit_mananger.gd" id="1_sq7yr"]
 [ext_resource type="Script" uid="uid://db88bx3dufe50" path="res://camera.gd" id="2_r3r3k"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dqq80e8qtd3fg" path="res://tower_ui.gd" id="10_ab83r"]
 [ext_resource type="Script" uid="uid://c7qc7rx7pbjj1" path="res://tower_resource.gd" id="11_1xb4a"]
 [ext_resource type="PackedScene" uid="uid://dxgcr5j3sb6gj" path="res://Tower.tscn" id="12_0dnjj"]
+[ext_resource type="PackedScene" uid="uid://cxbre5fu70emp" path="res://ice_tower.tscn" id="13_r3r3k"]
 [ext_resource type="Script" uid="uid://ju6040bsfsd0" path="res://tower_info_ui.gd" id="13_uwexw"]
 [ext_resource type="Texture2D" uid="uid://7jbofbr1pej5" path="res://64sizelandscapeassets/iso_cube_grey.png" id="14_8pgb7"]
 [ext_resource type="Texture2D" uid="uid://dfwjk1ryqislq" path="res://64sizelandscapeassets/iso_cube_right_coral_triangle.png" id="15_tilu5"]
@@ -837,7 +838,6 @@ texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cj3xu"]
-load_path = "res://.godot/imported/64atlas.png-6f517dff6c472c87fdbe4b54e1b9d0db.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ta5nu"]
 texture = SubResource("CompressedTexture2D_cj3xu")
@@ -1118,6 +1118,14 @@ size = 1
 cost = 100
 metadata/_custom_type_script = "uid://c7qc7rx7pbjj1"
 
+[sub_resource type="Resource" id="Resource_blcw0"]
+script = ExtResource("11_1xb4a")
+display_name = "Ice Tower"
+scene = ExtResource("13_r3r3k")
+size = 1
+cost = 500
+metadata/_custom_type_script = "uid://c7qc7rx7pbjj1"
+
 [sub_resource type="Theme" id="Theme_k73cj"]
 
 [node name="Level" type="Node2D"]
@@ -1185,7 +1193,7 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("10_ab83r")
 building_manager = NodePath("../../BuildManager")
-tower_resources = Array[ExtResource("11_1xb4a")]([SubResource("Resource_0h7mo"), SubResource("Resource_nr8wp"), SubResource("Resource_d2bti")])
+tower_resources = Array[ExtResource("11_1xb4a")]([SubResource("Resource_0h7mo"), SubResource("Resource_nr8wp"), SubResource("Resource_d2bti"), SubResource("Resource_blcw0")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterTop"]
 layout_mode = 0
@@ -1275,7 +1283,7 @@ vertical_alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterRight/PanelContainer/ExpandableInfo/TowerStats"]
 layout_mode = 2
 
-[node name="Upgrade Button" type="Button" parent="UI/CenterRight/PanelContainer/ExpandableInfo"]
+[node name="UpgradeButton" type="Button" parent="UI/CenterRight/PanelContainer/ExpandableInfo"]
 layout_mode = 2
 text = "Upgrade"
 icon_alignment = 1

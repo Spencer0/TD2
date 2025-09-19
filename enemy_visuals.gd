@@ -78,6 +78,11 @@ func play_hit_feedback():
 	tween.parallel().tween_property(sprite, "scale", Vector2(1.02, 0.98), 0.1)
 	tween.tween_property(sprite, "scale", Vector2.ONE, 0.1)
 
+func apply_visual_status_effect(status)
+	# How to best handle this given the current status effect implementation. 
+	# Also, open to ideas on what I'm doing wrong in my "unit" or enemy code
+	# and better ways to model that
+	
 # ---------------------------
 # DEATH EFFECT
 # ---------------------------

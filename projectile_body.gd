@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Projectile
 
 @onready var hitbox: Area2D = $Area2D
 @onready var visuals: ProjectileVisuals = $ProjectileVisuals
@@ -35,13 +36,11 @@ func _physics_process(delta: float) -> void:
 
 func _on_hit_enemy(body: Node) -> void:
 	if body.is_in_group("enemies"):
-		if body.has_method("take_damage"):
-			body.take_damage(damage)
-
-		# Play hit effect in world space
+		body.take_damage(damage)
+		## Add: body.add_status(status: String, strength: Int, duration :Timer) 
+		
 		visuals.play_hit_effect(global_position)
 		
-		# Stop movement immediately
 		set_physics_process(false)
 		velocity = Vector2.ZERO
 		hitbox.set_deferred("monitoring", false) # Prevent double hit

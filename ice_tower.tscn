@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxbre5fu70emp"]
+
+[ext_resource type="PackedScene" uid="uid://dxgcr5j3sb6gj" path="res://Tower.tscn" id="1_58ggv"]
+[ext_resource type="Texture2D" uid="uid://lfpxdhg5cu4j" path="res://64sizelandscapeassets/iso_cube_blue.png" id="2_2yqe6"]
+[ext_resource type="Script" uid="uid://bid58xdy0lxc7" path="res://ice_tower.gd" id="2_qdw0y"]
+[ext_resource type="PackedScene" uid="uid://c0rd7oev8hyb6" path="res://ice_projectile.tscn" id="3_rpivv"]
+[ext_resource type="Texture2D" uid="uid://dmhy2v5qaml0q" path="res://64sizelandscapeassets/iso_cube_blue_ramp.png" id="4_qdw0y"]
+
+[node name="IceTower" instance=ExtResource("1_58ggv")]
+script = ExtResource("2_qdw0y")
+projectile_scene = ExtResource("3_rpivv")
+
+[node name="Sprite2D3" parent="Visuals" index="0"]
+texture = ExtResource("2_2yqe6")
+
+[node name="Sprite2D4" parent="Visuals" index="1"]
+texture = ExtResource("2_2yqe6")
+
+[node name="Sprite2D5" parent="Visuals" index="2"]
+texture = ExtResource("2_2yqe6")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Visuals" index="3"]
+texture = ExtResource("2_2yqe6")
+offset = Vector2(0, -128)
+
+[node name="Sprite2D6" parent="Visuals" index="4"]
+position = Vector2(0, -32)
+texture = ExtResource("4_qdw0y")
+
+[node name="IsoCubeBlueRamp" type="Sprite2D" parent="Visuals" index="5"]
+position = Vector2(32, -112)
+texture = ExtResource("4_qdw0y")
+
+[node name="CollisionShape2D" parent="MouseHitBox" index="0"]
+position = Vector2(0, -56)

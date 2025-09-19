@@ -9,7 +9,6 @@ radius = 23.0
 height = 62.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_davkp"]
-load_path = "res://.godot/imported/iso_cube_green_ramp.png-9574b60b39e692422e3f84fa98642a23.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1sk4h"]
 atlas = SubResource("CompressedTexture2D_davkp")

@@ -140,7 +140,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		update_placement_preview()
 	
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.is_released():
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			attempt_placement()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
@@ -178,7 +178,6 @@ func place_tower(tile: Vector2i) -> void:
 	var tower_instance = current_resource.scene.instantiate()
 	print("place tower")
 	# Properly set up the tower
-	tower_instance.set_resource(current_resource)
 	tower_instance.resource = current_resource
 	
 	# Set position and add to scene with proper Y-sorting
