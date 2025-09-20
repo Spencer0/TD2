@@ -55,4 +55,6 @@ texture = SubResource("AtlasTexture_1sk4h")
 lifetime = 0.93
 process_material = SubResource("ParticleProcessMaterial_5wnup")
 
+[node name="MoveParticles" type="GPUParticles2D" parent="UnitVisuals"]
+
 [node name="DeathParticles" type="GPUParticles2D" parent="UnitVisuals"]
