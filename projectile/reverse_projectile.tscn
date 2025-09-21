@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://detj36jwxnrxd"]
+
+[ext_resource type="PackedScene" uid="uid://bsyr6cru2bwlm" path="res://projectile/projectile.tscn" id="1_k41bm"]
+[ext_resource type="Script" uid="uid://b3t5owfu631bo" path="res://projectile/reverse_projectile.gd" id="2_cfs22"]
+[ext_resource type="Texture2D" uid="uid://ctaxh1vwwe67i" path="res://asset/64aseetsbarnyard/iso_cube_missile_#32CD32_.png" id="3_hes66"]
+
+[node name="ReverseProjectile" instance=ExtResource("1_k41bm")]
+script = ExtResource("2_cfs22")
+status_type = "REVERSE"
+status_strength = 0.5
+status_duration = 2.0
+
+[node name="Sprite" parent="ProjectileVisuals" index="0"]
+texture = ExtResource("3_hes66")

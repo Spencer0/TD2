@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2lhhtxuek4ne"]
+
+[ext_resource type="PackedScene" uid="uid://dxgcr5j3sb6gj" path="res://tower/Tower.tscn" id="1_ou8br"]
+[ext_resource type="Script" uid="uid://21xt6c6hseci" path="res://tower/fire_tower.gd" id="2_akqvh"]
+[ext_resource type="Texture2D" uid="uid://vitaumqre2dp" path="res://asset/64sizelandscapeassets/iso_cube_crimson.png" id="2_urgpw"]
+[ext_resource type="Texture2D" uid="uid://dfwjk1ryqislq" path="res://asset/64sizelandscapeassets/iso_cube_right_coral_triangle.png" id="3_akqvh"]
+[ext_resource type="PackedScene" uid="uid://bv81fcnx136nm" path="res://projectile/fire_projectile.tscn" id="3_w1hso"]
+
+[node name="FireTower" instance=ExtResource("1_ou8br")]
+script = ExtResource("2_akqvh")
+projectile_scene = ExtResource("3_w1hso")
+
+[node name="Sprite2D3" parent="Visuals" index="0"]
+texture = ExtResource("2_urgpw")
+
+[node name="Sprite2D4" parent="Visuals" index="1"]
+texture = ExtResource("2_urgpw")
+
+[node name="Sprite2D5" parent="Visuals" index="2"]
+texture = ExtResource("2_urgpw")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Visuals" index="3"]
+position = Vector2(16, -88)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_akqvh")
+offset = Vector2(0, -128)
+
+[node name="Sprite2D11" type="Sprite2D" parent="Visuals" index="4"]
+position = Vector2(-16, -88)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_akqvh")
+offset = Vector2(0, -128)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Visuals" index="5"]
+position = Vector2(0, -80)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_akqvh")
+offset = Vector2(0, -128)
+
+[node name="Sprite2D6" parent="Visuals" index="6"]
+position = Vector2(16, -80)
+scale = Vector2(0.25, 0.25)
+
+[node name="Sprite2D7" type="Sprite2D" parent="Visuals" index="7"]
+position = Vector2(-16, -80)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_akqvh")
+offset = Vector2(0, -128)
+
+[node name="Sprite2D8" type="Sprite2D" parent="Visuals" index="8"]
+position = Vector2(0, -72)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_akqvh")
+offset = Vector2(0, -128)

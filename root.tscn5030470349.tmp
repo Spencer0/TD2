@@ -1,7 +1,6 @@
-[gd_scene load_steps=49 format=4 uid="uid://cj77no650hiir"]
+[gd_scene load_steps=47 format=4 uid="uid://cj77no650hiir"]
 
 [ext_resource type="Script" uid="uid://dvga6ax6o0lwx" path="res://unit/unit_mananger.gd" id="1_sq7yr"]
-[ext_resource type="Script" uid="uid://dkq880k2vd4ym" path="res://level_mananger.gd" id="1_ynlg5"]
 [ext_resource type="Script" uid="uid://dymos0ug7hism" path="res://unit/unit_resource.gd" id="2_50g4q"]
 [ext_resource type="Script" uid="uid://db88bx3dufe50" path="res://camera.gd" id="2_r3r3k"]
 [ext_resource type="PackedScene" uid="uid://oqbya16yd8ea" path="res://unit/slow_unit.tscn" id="3_3dlgs"]
@@ -23,15 +22,12 @@
 [ext_resource type="PackedScene" uid="uid://b2lhhtxuek4ne" path="res://tower/fire_tower.tscn" id="14_blcw0"]
 [ext_resource type="Texture2D" uid="uid://dfwjk1ryqislq" path="res://asset/64sizelandscapeassets/iso_cube_right_coral_triangle.png" id="15_tilu5"]
 [ext_resource type="Script" uid="uid://t8nl0xgi5uqi" path="res://tower/tower_hover_manager.gd" id="16_24xe2"]
-[ext_resource type="PackedScene" uid="uid://c7rro2mr37880" path="res://tower/reverse_tower.tscn" id="17_ub8w1"]
-[ext_resource type="Script" uid="uid://rg6y1bguo0co" path="res://game_stats_ui.gd" id="24_ab83r"]
 
 [sub_resource type="Resource" id="Resource_3dlgs"]
 script = ExtResource("2_50g4q")
 unit_name = "Basic Enemy"
 base_health = 10
 base_speed = 50.0
-value = 10
 scene = ExtResource("3_3dlgs")
 animation_type = 0
 rock_interval = 1.5
@@ -43,7 +39,6 @@ script = ExtResource("2_50g4q")
 unit_name = "Basic Enemy"
 base_health = 2
 base_speed = 100.0
-value = 10
 scene = ExtResource("4_vte5o")
 animation_type = 0
 rock_interval = 1.5
@@ -55,7 +50,6 @@ script = ExtResource("2_50g4q")
 unit_name = "Basic Enemy"
 base_health = 1
 base_speed = 200.0
-value = 10
 scene = ExtResource("5_po8fv")
 animation_type = 0
 rock_interval = 1.5
@@ -1140,7 +1134,15 @@ sources/0 = SubResource("TileSetAtlasSource_4d7sh")
 
 [sub_resource type="Resource" id="Resource_0h7mo"]
 script = ExtResource("11_1xb4a")
-display_name = "Pellet Tower"
+display_name = "Basic Tower 1"
+scene = ExtResource("12_0dnjj")
+size = 1
+cost = 100
+metadata/_custom_type_script = "uid://c7qc7rx7pbjj1"
+
+[sub_resource type="Resource" id="Resource_nr8wp"]
+script = ExtResource("11_1xb4a")
+display_name = "Basic Tower 2"
 scene = ExtResource("12_0dnjj")
 size = 1
 cost = 100
@@ -1148,8 +1150,8 @@ metadata/_custom_type_script = "uid://c7qc7rx7pbjj1"
 
 [sub_resource type="Resource" id="Resource_d2bti"]
 script = ExtResource("11_1xb4a")
-display_name = "Reverse Tower"
-scene = ExtResource("17_ub8w1")
+display_name = "Basic Tower 3"
+scene = ExtResource("12_0dnjj")
 size = 1
 cost = 100
 metadata/_custom_type_script = "uid://c7qc7rx7pbjj1"
@@ -1175,17 +1177,12 @@ metadata/_custom_type_script = "uid://c7qc7rx7pbjj1"
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
 
-[node name="LevelMananger" type="Node2D" parent="."]
-script = ExtResource("1_ynlg5")
-starting_money = 5000
-
-[node name="UnitMananger" type="Node2D" parent="." node_paths=PackedStringArray("spawn_timer", "target_point", "spawn_point", "units", "level_manager")]
+[node name="UnitMananger" type="Node2D" parent="." node_paths=PackedStringArray("spawn_timer", "target_point", "spawn_point", "units")]
 script = ExtResource("1_sq7yr")
 spawn_timer = NodePath("Timer")
 target_point = NodePath("../LevelConfiguration/TargetPoint")
 spawn_point = NodePath("../LevelConfiguration/SpawnPoint")
 units = NodePath("../Units")
-level_manager = NodePath("../LevelMananger")
 enemy_configs = Array[ExtResource("2_50g4q")]([SubResource("Resource_3dlgs"), SubResource("Resource_vte5o"), SubResource("Resource_ub8w1")])
 
 [node name="Timer" type="Timer" parent="UnitMananger"]
@@ -1217,13 +1214,12 @@ y_sort_enabled = true
 [node name="Towers" type="Node2D" parent="." groups=["towers"]]
 y_sort_enabled = true
 
-[node name="BuildManager" type="Node2D" parent="." node_paths=PackedStringArray("tilemaplayer", "placement_validator", "tower_info_ui", "TowerHoverManager", "level_manager")]
+[node name="BuildManager" type="Node2D" parent="." node_paths=PackedStringArray("tilemaplayer", "placement_validator", "tower_info_ui", "TowerHoverManager")]
 script = ExtResource("3_blcw0")
 tilemaplayer = NodePath("../Background/TileMapLayer")
 placement_validator = NodePath("PlacementValidator")
 tower_info_ui = NodePath("../UI/CenterRight")
 TowerHoverManager = NodePath("../TowerHoverManager")
-level_manager = NodePath("../LevelMananger")
 
 [node name="PlacementValidator" type="Node2D" parent="BuildManager"]
 script = ExtResource("4_50g4q")
@@ -1242,7 +1238,7 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("10_ab83r")
 building_manager = NodePath("../../BuildManager")
-tower_resources = Array[ExtResource("11_1xb4a")]([SubResource("Resource_0h7mo"), SubResource("Resource_d2bti"), SubResource("Resource_blcw0"), SubResource("Resource_50g4q")])
+tower_resources = Array[ExtResource("11_1xb4a")]([SubResource("Resource_0h7mo"), SubResource("Resource_nr8wp"), SubResource("Resource_d2bti"), SubResource("Resource_blcw0"), SubResource("Resource_50g4q")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterTop"]
 layout_mode = 0
@@ -1259,27 +1255,25 @@ text = "Towers"
 [node name="ExpandableList" type="VBoxContainer" parent="UI/CenterTop/VBoxContainer"]
 layout_mode = 2
 
-[node name="CenterRight" type="Control" parent="UI" node_paths=PackedStringArray("level_manager")]
+[node name="CenterRight" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -336.091
 offset_top = 18.2727
-offset_right = -336.091
-offset_bottom = 18.2727
+offset_right = -296.091
+offset_bottom = 58.2727
 grow_horizontal = 0
 script = ExtResource("13_uwexw")
-level_manager = NodePath("../../LevelMananger")
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/CenterRight"]
 layout_mode = 0
-offset_right = 388.0
-offset_bottom = 362.0
+offset_right = 40.0
+offset_bottom = 40.0
 scale = Vector2(0.8, 0.8)
 
 [node name="ExpandableInfo" type="VBoxContainer" parent="UI/CenterRight/PanelContainer"]
-custom_minimum_size = Vector2(338, 338)
 layout_mode = 2
 theme = SubResource("Theme_k73cj")
 
@@ -1337,56 +1331,6 @@ layout_mode = 2
 [node name="UpgradeButton" type="Button" parent="UI/CenterRight/PanelContainer/ExpandableInfo"]
 layout_mode = 2
 text = "Upgrade"
-icon_alignment = 1
-
-[node name="BottomLeft" type="Control" parent="UI" node_paths=PackedStringArray("level_manager")]
-layout_mode = 3
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 43.0
-offset_top = -58.0
-offset_right = 43.0
-offset_bottom = -58.0
-grow_vertical = 0
-script = ExtResource("24_ab83r")
-level_manager = NodePath("../../LevelMananger")
-
-[node name="PanelContainer2" type="PanelContainer" parent="UI/BottomLeft"]
-layout_mode = 0
-offset_left = -4.11362
-offset_top = -64.5909
-offset_right = 405.886
-offset_bottom = 68.4091
-scale = Vector2(0.8, 0.8)
-
-[node name="GameStats" type="VBoxContainer" parent="UI/BottomLeft/PanelContainer2"]
-layout_mode = 2
-
-[node name="MoneyLabel" type="RichTextLabel" parent="UI/BottomLeft/PanelContainer2/GameStats"]
-custom_minimum_size = Vector2(180, 30)
-layout_mode = 2
-text = "Money : 000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HealthLabel" type="RichTextLabel" parent="UI/BottomLeft/PanelContainer2/GameStats"]
-custom_minimum_size = Vector2(180, 30)
-layout_mode = 2
-text = "Health : 20"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WavesLabel" type="RichTextLabel" parent="UI/BottomLeft/PanelContainer2/GameStats"]
-custom_minimum_size = Vector2(230, 30)
-layout_mode = 2
-text = "Waves : 1/16"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MenuButton" type="Button" parent="UI/BottomLeft/PanelContainer2/GameStats"]
-layout_mode = 2
-text = "Menu"
 icon_alignment = 1
 
 [node name="TowerHoverManager" type="Node2D" parent="."]

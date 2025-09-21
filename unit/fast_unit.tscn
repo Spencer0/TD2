@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp32tfa85n3aj"]
+
+[ext_resource type="PackedScene" uid="uid://b0rg3nflkrqle" path="res://unit/unit.tscn" id="1_ipnyu"]
+[ext_resource type="Texture2D" uid="uid://carelg1efg0ky" path="res://asset/64aseetsbarnyard/iso_cube_#B0C4DE_ramp.png" id="2_px2n2"]
+[ext_resource type="Texture2D" uid="uid://b2h4uc4622fig" path="res://asset/64aseetsbarnyard/iso_cube_missile_#B0C4DE_.png" id="3_1vb4w"]
+[ext_resource type="Script" uid="uid://c6534xnbkkd64" path="res://unit/fast_unit_visuals.gd" id="3_2dwdq"]
+
+[node name="FastUnit" instance=ExtResource("1_ipnyu")]
+
+[node name="PhysicsHitbox" parent="." index="0"]
+position = Vector2(0, -22)
+
+[node name="MouseHitbox" parent="InteractivityRadius" index="0"]
+position = Vector2(2, -22)
+
+[node name="UnitVisuals" parent="." index="3" node_paths=PackedStringArray("additional_sprites")]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("3_2dwdq")
+additional_sprites = []
+
+[node name="Sprite2" type="Sprite2D" parent="UnitVisuals" index="0"]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(0, 36)
+texture = ExtResource("2_px2n2")
+offset = Vector2(0, -32)
+
+[node name="Sprite" parent="UnitVisuals" index="1"]
+texture = ExtResource("3_1vb4w")

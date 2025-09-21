@@ -7,6 +7,8 @@ signal enter_build_mode(resource: TowerResource)
 @export var placement_validator: PlacementValidator
 @export var tower_info_ui: Control
 @export var TowerHoverManager: Node2D
+@export var level_manager: LevelManager
+
 var current_resource: TowerResource = null
 var overlay_sprite: Sprite2D = null
 var ghost_tower: Node2D = null
@@ -103,6 +105,9 @@ func draw_line_on_image(img: Image, start: Vector2i, end: Vector2i, color: Color
 			y += y_step
 
 func enter_build_mode_with(resource: TowerResource) -> void:
+	if not can_enter_build_mode_with(resource):
+		print("Cannot afford tower: $", resource.cost, " (have $", level_manager.current_money if level_manager else "unknown", ")")
+		return
 	current_resource = resource
 	overlay_sprite.show()
 	
@@ -169,14 +174,13 @@ func attempt_placement() -> void:
 	var mouse_pos = tilemaplayer.get_local_mouse_position()
 	var tile = tilemaplayer.local_to_map(mouse_pos)
 	var valid = placement_validator.is_placement_valid(tile, current_resource.size, tilemaplayer)
-	
+	level_manager.spend_money(current_resource.cost)
 	if valid:
 		place_tower(tile)
 		cancel_build_mode()
 
 func place_tower(tile: Vector2i) -> void:
 	var tower_instance = current_resource.scene.instantiate()
-	print("place tower")
 	# Properly set up the tower
 	tower_instance.resource = current_resource
 	
@@ -203,3 +207,10 @@ func cancel_build_mode() -> void:
 		ghost_tower.queue_free()
 		ghost_tower = null
 	current_resource = null
+
+func can_enter_build_mode_with(resource: TowerResource) -> bool:
+	if not level_manager:
+		push_warning("BuildingManager: No LevelManager assigned, allowing placement")
+		return true
+	
+	return level_manager.can_afford(resource.cost)
