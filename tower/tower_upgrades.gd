@@ -9,7 +9,7 @@ func get_damage(level: int) -> float:
 		return damage_per_level[level]
 	return damage_per_level.back()
 
-func get_fire_rate(level: int) -> float:
+func get_fire_rate_scaling(level: int) -> float:
 	if level < fire_rate_per_level.size():
 		return fire_rate_per_level[level]
 	return fire_rate_per_level.back()

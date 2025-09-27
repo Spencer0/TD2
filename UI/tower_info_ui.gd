@@ -74,21 +74,8 @@ func update_upgrade_button() -> void:
 func get_upgrade_cost() -> int:
 	if not current_tower:
 		return -1
+	return current_tower.upgrade_cost
 	
-	# Check if tower has upgrade_cost property
-	if "upgrade_cost" in current_tower:
-		return current_tower.upgrade_cost
-	
-	# Fallback: check if tower resource has upgrade costs array
-	if current_resource and "upgrade_costs" in current_resource:
-		var level = current_tower.upgrade_level if "upgrade_level" in current_tower else 0
-		if level < current_resource.upgrade_costs.size():
-			return current_resource.upgrade_costs[level]
-	
-	# Default fallback cost based on level
-	var level = current_tower.upgrade_level if "upgrade_level" in current_tower else 0
-	var base_cost = current_resource.cost if current_resource else 100
-	return base_cost + (level * 50)  # Each upgrade costs base + 50 per level
 
 func _unhandled_input(event: InputEvent) -> void:
 	if just_opened:

@@ -7,6 +7,8 @@
 
 [node name="ReverseTower" instance=ExtResource("1_rl3y2")]
 projectile_scene = ExtResource("2_oktaw")
+fire_rate = 0.2
+upgrade_cost = 1000
 
 [node name="Sprite2D6" parent="Visuals" index="3"]
 texture = ExtResource("2_hieid")

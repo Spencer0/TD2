@@ -25,7 +25,7 @@ signal tower_clicked(tower: Node, resource: TowerResource)
 # Stats
 # -------------------------
 var damage := 1.0
-var fire_rate := 1.0
+@export var fire_rate := 1.0
 var projectile_speed := 300.0
 var detection_range := 150.0
 var firing_height := 96
@@ -33,7 +33,7 @@ var display_name = "Tower"
 
 # Upgrade state
 var upgrade_level := 0
-var upgrade_cost = 100
+@export var upgrade_cost = 100
 var max_upgrades = 4
 
 # -------------------------
@@ -187,7 +187,7 @@ func upgrade() -> void:
 	upgrade_cost = upgrade_cost * 2
 	if upgrade_data:
 		damage = upgrade_data.get_damage(upgrade_level)
-		fire_rate = upgrade_data.get_fire_rate(upgrade_level)
+		fire_rate = fire_rate * upgrade_data.get_fire_rate_scaling(upgrade_level)
 	if visuals:
 		visuals.set_upgrade_level(upgrade_level)
 

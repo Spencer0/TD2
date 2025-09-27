@@ -70,11 +70,9 @@ func _physics_process(delta: float) -> void:
 	if nav_agent.is_navigation_finished():
 		on_reached_destination()
 		return
-	
 	# Get basic pathfinding direction
 	var next_path_position = nav_agent.get_next_path_position()
 	var desired_direction = (next_path_position - global_position).normalized()
-	
 	
 	# Apply reverse status effect
 	if is_reversed:
@@ -174,7 +172,6 @@ func _tick_status_effect(type: StatusType) -> void:
 	match type:
 		StatusType.POISON:
 			var damage = int(active_statuses[type].strength)
-			print("Poison tick damage: ", damage)
 			take_damage(damage)
 		StatusType.BURN:
 			var damage = int(active_statuses[type].strength)

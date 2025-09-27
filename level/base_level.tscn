@@ -1,0 +1,359 @@
+[gd_scene load_steps=32 format=3 uid="uid://ckriaybvxiq1w"]
+
+[ext_resource type="Script" uid="uid://cqutdakwvumyk" path="res://level/level_ui.gd" id="1_n4atm"]
+[ext_resource type="Script" uid="uid://dqq80e8qtd3fg" path="res://UI/tower_ui.gd" id="2_gme48"]
+[ext_resource type="Script" uid="uid://c7qc7rx7pbjj1" path="res://tower/tower_resource.gd" id="3_wet35"]
+[ext_resource type="PackedScene" uid="uid://dxgcr5j3sb6gj" path="res://tower/Tower.tscn" id="4_uv6e1"]
+[ext_resource type="PackedScene" uid="uid://c7rro2mr37880" path="res://tower/reverse_tower.tscn" id="5_i0kf2"]
+[ext_resource type="PackedScene" uid="uid://cxbre5fu70emp" path="res://tower/ice_tower.tscn" id="6_wsfod"]
+[ext_resource type="PackedScene" uid="uid://b2lhhtxuek4ne" path="res://tower/fire_tower.tscn" id="7_uaj60"]
+[ext_resource type="Script" uid="uid://ju6040bsfsd0" path="res://UI/tower_info_ui.gd" id="8_6pq4q"]
+[ext_resource type="Texture2D" uid="uid://7jbofbr1pej5" path="res://asset/64sizelandscapeassets/iso_cube_grey.png" id="9_q8kev"]
+[ext_resource type="Texture2D" uid="uid://dfwjk1ryqislq" path="res://asset/64sizelandscapeassets/iso_cube_right_coral_triangle.png" id="10_j2pqo"]
+[ext_resource type="Script" uid="uid://rg6y1bguo0co" path="res://UI/game_stats_ui.gd" id="11_ltskt"]
+[ext_resource type="Script" uid="uid://ue5bxop3g6kg" path="res://level/level_menu.gd" id="12_62udt"]
+[ext_resource type="Script" uid="uid://t8nl0xgi5uqi" path="res://tower/tower_hover_manager.gd" id="13_gehdt"]
+[ext_resource type="Script" uid="uid://dkq880k2vd4ym" path="res://logic/level_mananger.gd" id="14_8hsqd"]
+[ext_resource type="Script" uid="uid://dd2dgpomg1mh2" path="res://logic/wave_manager.gd" id="15_lpgew"]
+[ext_resource type="Script" uid="uid://dymos0ug7hism" path="res://unit/unit_resource.gd" id="16_v7hif"]
+[ext_resource type="PackedScene" uid="uid://oqbya16yd8ea" path="res://unit/slow_unit.tscn" id="17_h8ym0"]
+[ext_resource type="PackedScene" uid="uid://b0rg3nflkrqle" path="res://unit/unit.tscn" id="18_kkihp"]
+[ext_resource type="PackedScene" uid="uid://cp32tfa85n3aj" path="res://unit/fast_unit.tscn" id="19_2se7w"]
+[ext_resource type="Script" uid="uid://dris5snklsjsx" path="res://logic/build_manager.gd" id="20_8bdel"]
+[ext_resource type="Script" uid="uid://0qkh1vm152sh" path="res://logic/placement_validator.gd" id="21_01ug0"]
+[ext_resource type="Script" uid="uid://db88bx3dufe50" path="res://camera.gd" id="22_r3tqr"]
+[ext_resource type="Script" uid="uid://brgkq2tu7u2ys" path="res://logic/unit_factory.gd" id="23_3ap1v"]
+
+[sub_resource type="Resource" id="Resource_0h7mo"]
+script = ExtResource("3_wet35")
+display_name = "Pellet Tower"
+scene = ExtResource("4_uv6e1")
+size = 1
+cost = 100
+metadata/_custom_type_script = "uid://c7qc7rx7pbjj1"
+
+[sub_resource type="Resource" id="Resource_50g4q"]
+script = ExtResource("3_wet35")
+display_name = "Fire Tower"
+scene = ExtResource("7_uaj60")
+size = 1
+cost = 300
+metadata/_custom_type_script = "uid://c7qc7rx7pbjj1"
+
+[sub_resource type="Resource" id="Resource_d2bti"]
+script = ExtResource("3_wet35")
+display_name = "Reverse Tower"
+scene = ExtResource("5_i0kf2")
+size = 1
+cost = 500
+metadata/_custom_type_script = "uid://c7qc7rx7pbjj1"
+
+[sub_resource type="Resource" id="Resource_blcw0"]
+script = ExtResource("3_wet35")
+display_name = "Ice Tower"
+scene = ExtResource("6_wsfod")
+size = 1
+cost = 500
+metadata/_custom_type_script = "uid://c7qc7rx7pbjj1"
+
+[sub_resource type="Theme" id="Theme_be1yf"]
+
+[sub_resource type="Resource" id="Resource_ynlg5"]
+script = ExtResource("16_v7hif")
+unit_name = "Basic Enemy"
+base_health = 40
+base_speed = 50.0
+value = 10
+scene = ExtResource("17_h8ym0")
+animation_type = 0
+rock_interval = 1.5
+rock_angle = 15.0
+metadata/_custom_type_script = "uid://dymos0ug7hism"
+
+[sub_resource type="Resource" id="Resource_ab83r"]
+script = ExtResource("16_v7hif")
+unit_name = "Basic Enemy"
+base_health = 20
+base_speed = 100.0
+value = 10
+scene = ExtResource("18_kkihp")
+animation_type = 0
+rock_interval = 1.5
+rock_angle = 15.0
+metadata/_custom_type_script = "uid://dymos0ug7hism"
+
+[sub_resource type="Resource" id="Resource_1xb4a"]
+script = ExtResource("16_v7hif")
+unit_name = "Basic Enemy"
+base_health = 1
+base_speed = 200.0
+value = 10
+scene = ExtResource("19_2se7w")
+animation_type = 0
+rock_interval = 1.5
+rock_angle = 15.0
+metadata/_custom_type_script = "uid://dymos0ug7hism"
+
+[node name="BaseLevel" type="Node2D"]
+
+[node name="Units" type="Node2D" parent="." groups=["enemies"]]
+y_sort_enabled = true
+
+[node name="Towers" type="Node2D" parent="." groups=["towers"]]
+y_sort_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("1_n4atm")
+
+[node name="CenterTop" type="Control" parent="UI" node_paths=PackedStringArray("building_manager")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2_gme48")
+building_manager = NodePath("../../BuildManager")
+tower_resources = Array[ExtResource("3_wet35")]([SubResource("Resource_0h7mo"), SubResource("Resource_50g4q"), SubResource("Resource_d2bti"), SubResource("Resource_blcw0")])
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterTop"]
+layout_mode = 0
+offset_left = 26.7117
+offset_top = 18.6918
+offset_right = 364.712
+offset_bottom = 53.6918
+alignment = 1
+
+[node name="PrimaryButton" type="Button" parent="UI/CenterTop/VBoxContainer"]
+layout_mode = 2
+text = "Towers"
+
+[node name="ExpandableList" type="VBoxContainer" parent="UI/CenterTop/VBoxContainer"]
+layout_mode = 2
+
+[node name="CenterRight" type="Control" parent="UI" node_paths=PackedStringArray("level_manager")]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -336.091
+offset_top = 18.2727
+offset_right = -336.091
+offset_bottom = 18.2727
+grow_horizontal = 0
+script = ExtResource("8_6pq4q")
+level_manager = NodePath("../../LevelMananger")
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/CenterRight"]
+layout_mode = 0
+offset_right = 388.0
+offset_bottom = 362.0
+scale = Vector2(0.8, 0.8)
+
+[node name="ExpandableInfo" type="VBoxContainer" parent="UI/CenterRight/PanelContainer"]
+custom_minimum_size = Vector2(338, 338)
+layout_mode = 2
+theme = SubResource("Theme_be1yf")
+
+[node name="DisplayName" type="Label" parent="UI/CenterRight/PanelContainer/ExpandableInfo"]
+layout_mode = 2
+text = "Basic Tower"
+horizontal_alignment = 1
+
+[node name="TowerStats" type="HBoxContainer" parent="UI/CenterRight/PanelContainer/ExpandableInfo"]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/CenterRight/PanelContainer/ExpandableInfo/TowerStats"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="UI/CenterRight/PanelContainer/ExpandableInfo/TowerStats/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(150, 300)
+render_target_update_mode = 4
+
+[node name="Visuals" type="Node2D" parent="UI/CenterRight/PanelContainer/ExpandableInfo/TowerStats/SubViewportContainer/SubViewport"]
+position = Vector2(108.909, 198.845)
+
+[node name="Sprite2D3" type="Sprite2D" parent="UI/CenterRight/PanelContainer/ExpandableInfo/TowerStats/SubViewportContainer/SubViewport/Visuals"]
+texture = ExtResource("9_q8kev")
+offset = Vector2(0, -32)
+
+[node name="Sprite2D4" type="Sprite2D" parent="UI/CenterRight/PanelContainer/ExpandableInfo/TowerStats/SubViewportContainer/SubViewport/Visuals"]
+texture = ExtResource("9_q8kev")
+offset = Vector2(0, -64)
+
+[node name="Sprite2D5" type="Sprite2D" parent="UI/CenterRight/PanelContainer/ExpandableInfo/TowerStats/SubViewportContainer/SubViewport/Visuals"]
+texture = ExtResource("9_q8kev")
+offset = Vector2(0, -96)
+
+[node name="Sprite2D6" type="Sprite2D" parent="UI/CenterRight/PanelContainer/ExpandableInfo/TowerStats/SubViewportContainer/SubViewport/Visuals"]
+texture = ExtResource("10_j2pqo")
+offset = Vector2(0, -128)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/CenterRight/PanelContainer/ExpandableInfo/TowerStats"]
+custom_minimum_size = Vector2(230, 260)
+layout_mode = 2
+text = "This is the basic tower descrption and stats. 
+
+
+
+Fire Rate: Slow
+Damage: Lots"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterRight/PanelContainer/ExpandableInfo/TowerStats"]
+layout_mode = 2
+
+[node name="UpgradeButton" type="Button" parent="UI/CenterRight/PanelContainer/ExpandableInfo"]
+layout_mode = 2
+text = "Upgrade"
+icon_alignment = 1
+
+[node name="BottomLeft" type="Control" parent="UI" node_paths=PackedStringArray("level_manager")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 43.0
+offset_top = -58.0
+offset_right = 43.0
+offset_bottom = -58.0
+grow_vertical = 0
+script = ExtResource("11_ltskt")
+level_manager = NodePath("../../LevelMananger")
+
+[node name="PanelContainer2" type="PanelContainer" parent="UI/BottomLeft"]
+layout_mode = 0
+offset_left = -4.11362
+offset_top = -64.5909
+offset_right = 405.886
+offset_bottom = 68.4091
+scale = Vector2(0.8, 0.8)
+
+[node name="GameStats" type="VBoxContainer" parent="UI/BottomLeft/PanelContainer2"]
+layout_mode = 2
+
+[node name="MoneyLabel" type="RichTextLabel" parent="UI/BottomLeft/PanelContainer2/GameStats"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "Money : 000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthLabel" type="RichTextLabel" parent="UI/BottomLeft/PanelContainer2/GameStats"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "Health : 20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WavesLabel" type="RichTextLabel" parent="UI/BottomLeft/PanelContainer2/GameStats"]
+custom_minimum_size = Vector2(230, 30)
+layout_mode = 2
+text = "Waves : 1/16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="Button" parent="UI/BottomLeft/PanelContainer2/GameStats"]
+layout_mode = 2
+text = "Menu"
+icon_alignment = 1
+
+[node name="LevelMenu" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_62udt")
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/LevelMenu"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/LevelMenu/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="UI/LevelMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="UI/LevelMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="ExitButton" type="Button" parent="UI/LevelMenu/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Exit"
+
+[node name="TowerHoverManager" type="Node2D" parent="."]
+script = ExtResource("13_gehdt")
+
+[node name="LevelMananger" type="Node2D" parent="." node_paths=PackedStringArray("wave_manager")]
+script = ExtResource("14_8hsqd")
+wave_manager = NodePath("../WaveManager")
+starting_money = 5000
+
+[node name="WaveManager" type="Node2D" parent="." node_paths=PackedStringArray("unit_factory", "level_manager")]
+script = ExtResource("15_lpgew")
+unit_factory = NodePath("../UnitFactory")
+level_manager = NodePath("../LevelMananger")
+available_units = Array[ExtResource("16_v7hif")]([SubResource("Resource_ynlg5"), SubResource("Resource_ab83r"), SubResource("Resource_1xb4a")])
+base_units_per_wave = null
+difficulty = null
+time_between_waves = null
+time_between_groups = null
+check_interval = null
+
+[node name="BuildManager" type="Node2D" parent="." node_paths=PackedStringArray("placement_validator", "tower_info_ui", "TowerHoverManager", "level_manager")]
+script = ExtResource("20_8bdel")
+placement_validator = NodePath("PlacementValidator")
+tower_info_ui = NodePath("../UI/CenterRight")
+TowerHoverManager = NodePath("../TowerHoverManager")
+level_manager = NodePath("../LevelMananger")
+
+[node name="PlacementValidator" type="Node2D" parent="BuildManager"]
+script = ExtResource("21_01ug0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -3000
+limit_top = -1500
+limit_right = 3000
+limit_bottom = 1500
+limit_smoothed = true
+position_smoothing_speed = 25.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("22_r3tqr")
+
+[node name="UnitFactory" type="Node2D" parent="." node_paths=PackedStringArray("units_container", "level_manager")]
+script = ExtResource("23_3ap1v")
+units_container = NodePath("../Units")
+level_manager = NodePath("../LevelMananger")
+
+[node name="LevelConfiguration" type="Node2D" parent="."]
+
+[node name="Tiles" type="Node2D" parent="."]
+z_index = -1000
+
+[connection signal="pressed" from="UI/BottomLeft/PanelContainer2/GameStats/MenuButton" to="UI/BottomLeft" method="_on_menu_button_pressed"]
