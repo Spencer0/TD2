@@ -117,6 +117,7 @@ func lose_life() -> void:
 	emit_signal("life_lost")
 	emit_stats_updated()
 	
+	
 	if current_lives <= 0:
 		get_tree().change_scene_to_file("res://menus/StageSelection.tscn")
 		emit_signal("game_over")
