@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://gtttyw845kpb"]
+[gd_scene load_steps=9 format=3 uid="uid://gtttyw845kpb"]
 
 [ext_resource type="Script" uid="uid://c2t2rai1fgn2m" path="res://menus/stage_selection.gd" id="1_bx55k"]
 [ext_resource type="Script" uid="uid://higooxdapf44" path="res://logic/level_resource.gd" id="2_xdbob"]
 [ext_resource type="PackedScene" uid="uid://mfip5whk3jk4" path="res://level/level_one.tscn" id="3_4oelb"]
 [ext_resource type="PackedScene" uid="uid://dt8s2dgy1ev73" path="res://level/level_two.tscn" id="4_7lmgs"]
+[ext_resource type="PackedScene" uid="uid://cuk7hratbafau" path="res://level_three.tscn" id="5_bx55k"]
 
 [sub_resource type="Resource" id="Resource_gb11n"]
 script = ExtResource("2_xdbob")
@@ -19,9 +20,16 @@ menu_image_path_to_texture = "res://asset/levelviews/LevelTwo.PNG"
 main_scene = ExtResource("4_7lmgs")
 metadata/_custom_type_script = "uid://higooxdapf44"
 
+[sub_resource type="Resource" id="Resource_xdbob"]
+script = ExtResource("2_xdbob")
+display_name = "Space"
+menu_image_path_to_texture = "res://asset/levelviews/LevelThree.PNG"
+main_scene = ExtResource("5_bx55k")
+metadata/_custom_type_script = "uid://higooxdapf44"
+
 [node name="StageSelection" type="Node2D"]
 script = ExtResource("1_bx55k")
-levels = Array[ExtResource("2_xdbob")]([SubResource("Resource_gb11n"), SubResource("Resource_bx55k")])
+levels = Array[ExtResource("2_xdbob")]([SubResource("Resource_gb11n"), SubResource("Resource_bx55k"), SubResource("Resource_xdbob")])
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3

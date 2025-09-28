@@ -322,7 +322,6 @@ available_units = Array[ExtResource("16_v7hif")]([SubResource("Resource_ynlg5"),
 base_units_per_wave = null
 difficulty = null
 time_between_waves = null
-time_between_groups = null
 check_interval = null
 
 [node name="BuildManager" type="Node2D" parent="." node_paths=PackedStringArray("placement_validator", "tower_info_ui", "TowerHoverManager", "level_manager")]

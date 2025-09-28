@@ -25,6 +25,3 @@ func apply_hover_effect():
 	
 func remove_hover_effect():
 	modulate = Color.WHITE
-	
-func apply_click_effect():
-	modulate = Color.GREEN

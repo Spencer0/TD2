@@ -5,7 +5,7 @@ class_name UnitFactory
 # Configuration
 # -------------------------
 @export var spawn_point: Marker2D
-@export var target_point: Marker2D
+@export var target_points: Array[Marker2D] = []
 @export var units_container: Node2D
 @export var level_manager: LevelManager
 
@@ -28,6 +28,13 @@ signal unit_spawned(unit: UnitLogic)
 # -------------------------
 func _ready() -> void:
 	print("UnitFactory ready")
+	
+	# Validate configuration
+	if not spawn_point:
+		push_error("UnitFactory: No spawn point assigned!")
+	if target_points.is_empty():
+		push_error("UnitFactory: No target points assigned!")
+	
 	# Create and configure spawn timer
 	spawn_timer = Timer.new()
 	spawn_timer.wait_time = current_spawn_delay
@@ -70,11 +77,22 @@ func is_queue_empty() -> bool:
 	return spawn_queue.is_empty()
 
 # -------------------------
+# Target Selection
+# -------------------------
+func get_random_target() -> Marker2D:
+	"""Returns a random target point from the list"""
+	if target_points.is_empty():
+		push_error("UnitFactory: No target points available!")
+		return null
+	
+	return target_points[randi() % target_points.size()]
+
+# -------------------------
 # Spawning Logic
 # -------------------------
 func _on_spawn_timer_timeout() -> void:
 	if spawn_queue.is_empty():
-		_finish_spawning()
+		finish_spawning()
 		return
 	
 	spawn_next_unit()
@@ -101,13 +119,21 @@ func create_unit(config: UnitConfig) -> UnitLogic:
 	if not units_container:
 		push_error("UnitFactory: No units container assigned!")
 		return null
-		
+	
+	# Get random target point
+	var target_point = get_random_target()
+	if not target_point:
+		push_error("UnitFactory: Could not get valid target point")
+		return null
+	
 	# Add to scene
 	units_container.add_child(unit)
+	
+	# Set spawn position
 	unit.global_position = spawn_point.global_position if spawn_point else Vector2.ZERO
 	
-	# Setup the unit
-	var target_pos = target_point.global_position if target_point else Vector2.ZERO
+	# Setup the unit with random target
+	var target_pos = target_point.global_position
 	unit.setup_enemy(target_pos, config)
 	unit.add_to_group("units")
 	
@@ -115,10 +141,10 @@ func create_unit(config: UnitConfig) -> UnitLogic:
 	if level_manager:
 		level_manager.register_unit(unit)
 	
-	print("Spawned unit: ", config.unit_name)
+	print("Spawned unit: %s targeting %s" % [config.unit_name, target_point.name])
 	return unit
 
-func _finish_spawning() -> void:
+func finish_spawning() -> void:
 	"""Called when spawn queue is empty"""
 	is_spawning = false
 	spawn_timer.stop()

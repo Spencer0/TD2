@@ -208,7 +208,6 @@ func set_hovered(state: bool) -> void:
 func click() -> void:
 	if(!can_be_clicked):
 		return
-	visuals.apply_click_effect()
 	emit_signal("tower_clicked", self, self.resource)
 
 # -------------------------

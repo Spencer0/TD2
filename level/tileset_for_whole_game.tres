@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=24 format=3 uid="uid://cuht70ty6as3h"]
+[gd_resource type="TileSet" load_steps=25 format=3 uid="uid://cuht70ty6as3h"]
 
 [ext_resource type="Texture2D" uid="uid://b4jxtqljlqs5d" path="res://asset/64aseetsbarnyard/spritesheet_all_sprites.png" id="1_aos0a"]
 [ext_resource type="Texture2D" uid="uid://mso2ga8ordqb" path="res://asset/64sizelandscapeassets/iso_cube_right_purple_ramp.png" id="2_hy0s8"]
@@ -13,6 +13,12 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(0, -16, -32, 0, 0, 16, 
 agent_radius = 0.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aorys"]
+vertices = PackedVector2Array(32, 0, 0, 16, -32, 0, 0, -16)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, -16, -32, 0, 0, 16, 32, 0)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_hy0s8"]
 vertices = PackedVector2Array(32, 0, 0, 16, -32, 0, 0, -16)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(0, -16, -32, 0, 0, 16, 32, 0)])
@@ -172,6 +178,7 @@ texture_region_size = Vector2i(64, 64)
 13:0/0 = 0
 13:0/0/texture_origin = Vector2i(0, -16)
 13:0/0/y_sort_origin = 16
+13:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_hy0s8")
 14:0/0 = 0
 14:0/0/texture_origin = Vector2i(0, -16)
 14:0/0/y_sort_origin = 16
@@ -304,9 +311,11 @@ texture_region_size = Vector2i(64, 64)
 10:1/0 = 0
 10:1/0/texture_origin = Vector2i(0, -16)
 10:1/0/y_sort_origin = 16
+10:1/0/custom_data_0 = true
 9:1/0 = 0
 9:1/0/texture_origin = Vector2i(0, -16)
 9:1/0/y_sort_origin = 16
+9:1/0/custom_data_0 = true
 8:1/0 = 0
 8:1/0/texture_origin = Vector2i(0, -16)
 8:1/0/y_sort_origin = 16

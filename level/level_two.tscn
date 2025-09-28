@@ -12,9 +12,9 @@ difficulty = 2
 [node name="BuildManager" parent="." index="6" node_paths=PackedStringArray("tilemaplayer")]
 tilemaplayer = NodePath("../Tiles/TileMapLayer")
 
-[node name="UnitFactory" parent="." index="8" node_paths=PackedStringArray("spawn_point", "target_point")]
+[node name="UnitFactory" parent="." index="8" node_paths=PackedStringArray("spawn_point", "target_points")]
 spawn_point = NodePath("../LevelConfiguration/SpawnPoint")
-target_point = NodePath("../LevelConfiguration/TargetPoint")
+target_points = [NodePath("../LevelConfiguration/TargetPoint")]
 
 [node name="SpawnPoint" type="Marker2D" parent="LevelConfiguration" index="0"]
 position = Vector2(1948.18, -631.77)
