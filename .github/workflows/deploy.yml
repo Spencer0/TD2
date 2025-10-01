@@ -25,7 +25,7 @@ jobs:
           relative_project_path: ./           # path to your Godot project root
           use_preset_export_path: true       # export path from export_presets.cfg
           export_preset_name: Web          # must match the name of your HTML5 export preset
-          cache: true                        # cache Godot binaries/templates for faster CI
+          cache: false                        # cache Godot binaries/templates for faster CI
 
       # 3️⃣ Deploy exported files to GitHub Pages
       - name: Deploy to GitHub Pages
