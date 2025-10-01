@@ -22,13 +22,7 @@ jobs:
           export_preset_name: Web
           create_release: false         # Don't create GitHub release
           archive_export_output: false  # Don't create archive
-          
-      - name: Check exported file sizes
-        run: |
-          ls -lh ./build/
-          echo "index.pck size:"
-          ls -lh ./build/index.pck
-      
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
