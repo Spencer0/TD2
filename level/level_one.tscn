@@ -10,7 +10,7 @@ tilemaplayer = NodePath("../Tiles/TileMapLayer")
 
 [node name="UnitFactory" parent="." index="8" node_paths=PackedStringArray("spawn_point", "target_points")]
 spawn_point = NodePath("../LevelConfiguration/SpawnPoint")
-target_points = [NodePath("../LevelConfiguration/TargetPoint"), NodePath("")]
+target_points = [NodePath("../LevelConfiguration/TargetPoint"), null]
 
 [node name="SpawnPoint" type="Marker2D" parent="LevelConfiguration" index="0"]
 position = Vector2(1361.29, -107.117)

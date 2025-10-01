@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://higooxdapf44" path="res://logic/level_resource.gd" id="2_xdbob"]
 [ext_resource type="PackedScene" uid="uid://mfip5whk3jk4" path="res://level/level_one.tscn" id="3_4oelb"]
 [ext_resource type="PackedScene" uid="uid://dt8s2dgy1ev73" path="res://level/level_two.tscn" id="4_7lmgs"]
-[ext_resource type="PackedScene" uid="uid://cuk7hratbafau" path="res://level_three.tscn" id="5_bx55k"]
+[ext_resource type="PackedScene" uid="uid://cuk7hratbafau" path="res://level/level_three.tscn" id="5_bx55k"]
 
 [sub_resource type="Resource" id="Resource_gb11n"]
 script = ExtResource("2_xdbob")
