@@ -1,36 +1,37 @@
 name: Deploy Godot HTML5 to GitHub Pages
-
 on:
   push:
-    branches: [ main ]  # deploy on push to main
-
+    branches: [ main ]
 jobs:
   export-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # 1️⃣ Checkout your repo
       - name: Checkout source
         uses: actions/checkout@v5
-
-      # 2️⃣ Export HTML5 build using firebelley/godot-export
+      
       - name: Export Godot HTML5
         id: export
         uses: firebelley/godot-export@v7.0.0
         with:
-          # Pinned Godot version
           godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
           godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
           
-          relative_project_path: ./           # path to your Godot project root
-          use_preset_export_path: true       # export path from export_presets.cfg
-          export_preset_name: Web          # must match the name of your HTML5 export preset
-          cache: false                        # cache Godot binaries/templates for faster CI
-
-      # 3️⃣ Deploy exported files to GitHub Pages
+          relative_project_path: ./
+          export_debug: false           # Ensure release build
+          use_preset_export_path: true
+          export_preset_name: Web
+          create_release: false         # Don't create GitHub release
+          archive_export_output: false  # Don't create archive
+          
+      - name: Check exported file sizes
+        run: |
+          ls -lh ./build/
+          echo "index.pck size:"
+          ls -lh ./build/index.pck
+      
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages          # branch where Pages will serve files
-          publish_dir: ./build              # must match your export preset output folder
+          publish_branch: gh-pages
+          publish_dir: ./build
